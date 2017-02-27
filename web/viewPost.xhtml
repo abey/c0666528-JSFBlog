@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>#{posts.currentPost.title} - Blogpress</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css" />
+        <style>
+            .w3-container {
+                margin-left: 20%;
+                margin-right: 20%;
+            }
+            .firstOne {
+                margin-top: 3%;
+            }
+            a {
+                text-decoration: none;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <h:form>
+            <div class="w3-container w3-black firstOne">
+                <h1><a href="index.xhtml">Blogpress</a></h1>
+                <hr />
+                <h:form>            
+                    <c:if test="#{login.loggedIn}">
+                        <h:commandButton value="Edit" class="w3-button" action="#{posts.editPost()}" />
+                    </c:if>
+                    <c:if test="#{!login.loggedIn}">
+                        <h:button class="w3-button" value="Login" outcome="login" />
+                    </c:if>
+                    <h:button class="w3-button" value="Return" outcome="index" />
+                </h:form>
+                <hr />
+            </div>
+            <div class="w3-container">
+                <h2>#{posts.currentPost.title}</h2>
+                <p>#{posts.currentPost.contents}</p>
+                <hr />
+                <p><strong>By #{users.getUsernameById(posts.currentPost.user_id)} at #{posts.currentPost.createdTime.toLocaleString()}</strong></p>
+            </div>
+            <div class="w3-container w3-black">
+                <p>Copyright Lambton College. Created by <a href="https://abinodh.com">Abinodh Thomas - c0666528</a></p>
+            </div>
+        </h:form>
+    </h:body>
+</html>
+
